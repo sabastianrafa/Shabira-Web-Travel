@@ -10,155 +10,367 @@
         html {
             scroll-behavior: smooth;
         }
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(228, 0, 130, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(228, 0, 130, 0.8); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .glow-effect {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #E40082 0%, #FF1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(228, 0, 130, 0.3);
+        }
+        
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 29, 0.95);
+        }
+        
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .slide-in {
+            animation: slideInFromLeft 0.5s ease-out;
+        }
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="font-sans">
     <!-- Navbar -->
-    <nav class="bg-[#1A1A1D] text-white sticky top-0 z-50">
-      <div class="container mx-auto px-4">
-          <div class="flex justify-between items-center py-4">
-              <div class="flex items-center pl-5 pt-5 pb-5">
-                  <a href="#beranda">
-                    <img src="images/Logo.png" alt="Logo Shabira Trans" class="h-10 drop-shadow-[0_0px_15px_rgba(228,0,130,100)] animate-glow">
-                  </a>
-              </div>
-                <!-- Menu Desktop -->
-                <div class="hidden md:flex space-x-8 mr-5">
-                    <a href="#beranda" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,100)] transition bold">BERANDA</a>
-                    <a href="#layanan" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,100)] transition">LAYANAN</a>
-                    <a href="#armada" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,100)] transition">ARMADA</a>
-                    <a href="#rute" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,100)] transition">RUTE</a>
-                    <a href="#kontak" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,100)] transition">KONTAK</a>
+    <header class="fixed w-full z-50">
+        <nav class="navbar-blur text-white shadow-[0_4px_30px_rgba(228,0,130,0.2)]">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <!-- Logo -->
+                    <div class="flex items-center pl-5 pt-4 pb-4">
+                        <a href="#beranda" class="flex items-center space-x-3">
+                            <div class="">
+                                <img src="images/Logo.png" alt="Logo Shabira Trans" class="h-10 float-animation glow-effect">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Menu Desktop -->
+                    <div class="hidden md:flex space-x-8 mr-5 font-semibold">
+                        <a href="#beranda" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            BERANDA
+                        </a>
+                        <a href="#layanan" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            LAYANAN
+                        </a>
+                        <a href="#fasilitas" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            FASILITAS
+                        </a>
+                        <a href="#armada" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            ARMADA
+                        </a>
+                        <a href="#rute" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            RUTE
+                        </a>
+                        <a href="#kontak" class="hover:text-[#E40082] hover:drop-shadow-[0_0px_20px_rgba(228,0,130,1)] transition duration-300 relative group">
+                            KONTAK
+                        </a>
+                    </div>
+
+                    <!-- Hamburger Menu Mobile -->
+                    <button id="hamburger" class="md:hidden focus:outline-none hover:text-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,1)] transition">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
                 </div>
-                
-                <!-- Hamburger Menu Mobile -->
-                <button id="hamburger" class="md:hidden focus:outline-none hover:text-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] transition">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+
+                <!-- Menu Mobile -->
+                <div id="mobile-menu" class="hidden md:hidden pb-4 slide-in">
+                    <a href="#beranda" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300 mb-1">Beranda</a>
+                    <a href="#layanan" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300 mb-1">Layanan</a>
+                    <a href="#fasilitas" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300 mb-1">Fasilitas</a>
+                    <a href="#armada" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300 mb-1">Armada</a>
+                    <a href="#rute" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300 mb-1">Rute</a>
+                    <a href="#kontak" class="block py-3 px-4 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 rounded-lg transition duration-300">Kontak</a>
+                </div>
             </div>
-            
-            <!-- Menu Mobile -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#beranda" class="block py-2 hover:bg-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] px-2 rounded">Beranda</a>
-                <a href="#layanan" class="block py-2 hover:bg-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] px-2 rounded">Layanan</a>
-                <a href="#armada" class="block py-2 hover:bg-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] px-2 rounded">Armada</a>
-                <a href="#rute" class="block py-2 hover:bg-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] px-2 rounded">Rute</a>
-                <a href="#kontak" class="block py-2 hover:bg-[#E40082] hover:drop-shadow-[0_0px_15px_rgba(228,0,130,100)] px-2 rounded">Kontak</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
+
 
     <!-- Beranda -->
-    <section id="beranda" 
-        class="relative text-white min-h-screen flex flex-col justify-center items-center py-20 bg-cover bg-center bg-fixed"
+    <section id="beranda" class="relative text-white min-h-screen flex flex-col justify-center items-center py-20 bg-cover bg-center bg-fixed"
         style="background-image: url('images/Background.jpg');">
-        <!-- Overlay gelap untuk kontras teks -->
-        <div class="absolute inset-0 bg-black/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/90"></div>
 
-        <!-- Konten Beranda -->
         <div class="relative z-10 container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Shabira Trans</h1>
-            <p class="text-xl md:text-2xl mb-8">Layanan Perjalanan Terpercaya</p>
-            <p class="max-w-2xl mx-auto mb-10">
+            <div class="float-animation mb-2">
+                <div class="inline-block">
+                    <img src="images/Logo.png" alt="Logo Shabira Trans" class="h-24 shadow-lg glow-effect shadow-2xl glow-effect mx-auto mb-4 bg-gradient-to-br">
+                </div>
+            </div>
+            
+            <p class="text-2xl md:text-3xl mb-8 text-pink-300">Layanan Perjalanan Terpercaya</p>
+            <p class="max-w-2xl mx-auto mb-10 text-lg text-gray-300">
                 Kami menyediakan layanan perjalanan dengan armada terbaik dan rute lengkap. Nikmati perjalanan nyaman, aman, dan tepat waktu bersama Shabira Trans.
             </p>
-            <a href="#layanan" class="bg-white text-pink-600 px-6 py-3 rounded-lg font-semibold hover:bg-pink-100 transition animate-fadeIn delay-600">
-                Lihat Layanan
+            <a href="#layanan" class="inline-block bg-gradient-to-r from-pink-600 to-pink-700 text-white px-8 py-4 rounded-full font-semibold hover:from-pink-700 hover:to-pink-800 transition duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+                <i class="fas fa-compass mr-2"></i>Lihat Layanan
             </a>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-pink-500 text-3xl"></i>
         </div>
     </section>
 
     <!-- Layanan -->
-    <section id="layanan" class="py-16 bg-gray-50 min-h-screen">
+    <section id="layanan" class="py-[60px] bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Paket Layanan Kami</h2>
+            <div class="text-center mb-10">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Paket Layanan Kami</h2>
+                 <p class="text-gray-400 text-lg">Pilih destinasi impian Anda bersama kami</p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Paket 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 flex items-center justify-center">
-                        <img src="https://akcdn.detik.net.id/visual/2020/09/01/kemenpar-iklan-1_169.png?w=1200" alt="Jawa Bali" class="w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Malang - Bali</h3>
-                        <p class="text-gray-600 mb-4">Perjalanan menyenangkan dari Malang ke Bali dengan pemandangan menakjubkan.</p>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Perjalanan langsung</span>
-                            </li>
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Fasilitas AC</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Dapatkan harga spesial</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">Rp 350.000</span>
-                            <button onclick="pesanPaket('Malang - Bali')" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">Pesan Sekarang</button>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/Bali1.jpg" alt="Malang Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                <i class="fas fa-fire mr-1"></i>Populer
+                            </span>
                         </div>
                     </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-white">Malang ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Perjalanan nyaman dari Kota Bunga ke Pulau Dewata dengan sopir berpengalaman dan armada terbaik.
+                        </p>
+                        <button onclick="pesanPaket('Malang - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
                 </div>
-                
+
                 <!-- Paket 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 flex items-center justify-center">
-                        <img src="https://storage.googleapis.com/mihwan/images/post/_1200x675_crop_center-center_none/Suramadu.jpg" alt="Malang Madura" class="w-full h-48 object-cover">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/Bali2.jpg" alt="Blitar Kediri Mojokerto Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Malang - Madura</h3>
-                        <p class="text-gray-600 mb-4">Nikmati perjalanan dari Malang ke Madura dengan pemandangan khas Jawa Timur.</p>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Melalui Jembatan Suramadu</span>
-                            </li>
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Armada nyaman</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Harga terjangkau</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">Rp 250.000</span>
-                            <button onclick="pesanPaket('Malang - Madura')" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">Pesan Sekarang</button>
-                        </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 text-white">Blitar, Kediri, Mojokerto ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Layanan cepat dan aman dari Jawa Timur bagian tengah menuju Bali dengan standar terbaik.
+                        </p>
+                        <button onclick="pesanPaket('Blitar, Kediri, Mojokerto - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
                     </div>
                 </div>
-                
+
                 <!-- Paket 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 flex items-center justify-center">
-                        <img src="https://www.cekpremi.com/blog/wp-content/uploads/2021/04/Masjid-Menara-Kudus-scaled.jpg" alt="Wisata dan Ziarah" class="w-full h-48 object-cover">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/Bali3.jpg" alt="Surabaya Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Ziarah Wali</h3>
-                        <p class="text-gray-600 mb-4">Paket khusus ziarah wali songo dengan fasilitas lengkap dan pemandu berpengalaman.</p>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Kunjungi makam wali songo</span>
-                            </li>
-                            <li class="flex items-center mb-2">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Pemandu ziarah berpengalaman</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-green-500 mr-2"></i>
-                                <span>Paket 3 hari 2 malam</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">Rp 1.200.000</span>
-                            <button onclick="pesanPaket('Ziarah Wali')" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">Pesan Sekarang</button>
-                        </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-white">Surabaya ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Layanan perjalanan bisnis atau liburan dengan sopir ramah dan pelayanan profesional.
+                        </p>
+                        <button onclick="pesanPaket('Surabaya - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket 4 -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/bali2.webp" alt="Madura Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-white">Madura ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Rute langsung Madura–Bali dengan armada bersih dan pelayanan ramah untuk perjalanan nyaman.
+                        </p>
+                        <button onclick="pesanPaket('Madura - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket 5 -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/Bali5.jpg" alt="Jawa Tengah Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-white">Jawa Tengah ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Perjalanan lintas provinsi aman, tepat waktu, dan nyaman dengan armada terawat.
+                        </p>
+                        <button onclick="pesanPaket('Jawa Tengah - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket 6 -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Bali/Bali6.jpg" alt="Jakarta Bali" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 text-white">Jakarta ⇄ Bali</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Nikmati perjalanan jarak jauh nyaman dan efisien dengan fasilitas lengkap dan sopir profesional.
+                        </p>
+                        <button onclick="pesanPaket('Jakarta - Bali')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket 7 -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Banyuwangi.jpg" alt="Malang Banyuwangi" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 text-white">Malang, Surabaya ⇄ Banyuwangi</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Perjalanan cepat dan nyaman dari Malang atau Surabaya menuju Banyuwangi dengan layanan tepat waktu.
+                        </p>
+                        <button onclick="pesanPaket('Malang - Banyuwangi')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket 8 -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col card-hover border border-pink-900/30">
+                    <div class="relative overflow-hidden group">
+                        <img src="images/Madura.jpeg" alt="Malang Madura" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold mb-2 text-white">Malang, Surabaya ⇄ Madura</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Layanan aman dan nyaman dengan armada terawat serta sopir berpengalaman.
+                        </p>
+                        <button onclick="pesanPaket('Malang - Madura')" 
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full hover:from-pink-700 hover:to-pink-800 transition duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fasilitas -->
+    <section id="fasilitas" class="py-[50px] bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold pb-6 gradient-text">Fasilitas Yang Kami Tawarkan</h2>
+                <p class="text-gray-400 text-lg">Kenyamanan perjalanan Anda adalah prioritas kami</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex items-start space-x-4 card-hover border border-pink-900/30">
+                    <div class="flex-shrink-0 bg-gradient-to-br from-pink-600 to-pink-700 text-white p-4 rounded-xl shadow-lg">
+                        <i class="fas fa-wind text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white mb-2">Fasilitas AC</h3>
+                        <p class="text-gray-400 text-sm">Kenyamanan selama perjalanan tetap terjaga dengan udara sejuk.</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex items-start space-x-4 card-hover border border-pink-900/30">
+                    <div class="flex-shrink-0 bg-gradient-to-br from-pink-600 to-pink-700 text-white p-4 rounded-xl shadow-lg">
+                        <i class="fas fa-tag text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white mb-2">Harga Spesial</h3>
+                        <p class="text-gray-400 text-sm">Nikmati promo menarik untuk setiap pemesanan perjalanan Anda.</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex items-start space-x-4 card-hover border border-pink-900/30">
+                    <div class="flex-shrink-0 bg-gradient-to-br from-pink-600 to-pink-700 text-white p-4 rounded-xl shadow-lg">
+                        <i class="fas fa-utensils text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white mb-2">Service Makan 1x</h3>
+                        <p class="text-gray-400 text-sm">Nikmati hidangan lezat sekali selama perjalanan Anda.</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex items-start space-x-4 card-hover border border-pink-900/30">
+                    <div class="flex-shrink-0 bg-gradient-to-br from-pink-600 to-pink-700 text-white p-4 rounded-xl shadow-lg">
+                        <i class="fas fa-car-side text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white mb-2">Antar Jemput Door to Door</h3>
+                        <p class="text-gray-400 text-sm">Kami menjemput dan mengantar Anda langsung dari lokasi ke tujuan.</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex items-start space-x-4 card-hover border border-pink-900/30">
+                    <div class="flex-shrink-0 bg-gradient-to-br from-pink-600 to-pink-700 text-white p-4 rounded-xl shadow-lg">
+                        <i class="fas fa-music text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white mb-2">Full Music</h3>
+                        <p class="text-gray-400 text-sm">Perjalanan lebih seru dengan musik favorit Anda di sepanjang jalan.</p>
                     </div>
                 </div>
             </div>
@@ -174,52 +386,10 @@
                 <!-- Kendaraan 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <div class="h-64 bg-gray-200 flex items-center justify-center">
-                        <img src="images/Xenia.jpg" alt="Wisata dan Ziarah" class="w-full h-64 object-cover">
+                        <img src="images/Mobil/xenia.jpg" alt="Mobil Kecil" class="w-full h-64 object-cover">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Bus Pariwisata</h3>
-                        <p class="text-gray-600 mb-4">Bus dengan fasilitas lengkap untuk perjalanan jarak jauh dan rombongan besar.</p>
-                        <div class="flex justify-between">
-                            <div>
-                                <p class="font-semibold">Tipe:</p>
-                                <p class="text-gray-600">Big Bus</p>
-                            </div>
-                            <div>
-                                <p class="font-semibold">Kapasitas:</p>
-                                <p class="text-gray-600">40-50 Orang</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Kendaraan 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-64 bg-gray-200 flex items-center justify-center">
-                        <img src="images/Heice.jpg" alt="Wisata dan Ziarah" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Elf</h3>
-                        <p class="text-gray-600 mb-4">Kendaraan nyaman untuk grup kecil dan perjalanan menengah.</p>
-                        <div class="flex justify-between">
-                            <div>
-                                <p class="font-semibold">Tipe:</p>
-                                <p class="text-gray-600">Mini Bus</p>
-                            </div>
-                            <div>
-                                <p class="font-semibold">Kapasitas:</p>
-                                <p class="text-gray-600">12-16 Orang</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Kendaraan 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-64 bg-gray-200 flex items-center justify-center">
-                        <img src="images/Elf.jpg" alt="Wisata dan Ziarah" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Mobil Pribadi</h3>
+                        <h3 class="text-xl font-bold mb-2">Mobil Kecil</h3>
                         <p class="text-gray-600 mb-4">Mobil nyaman untuk perjalanan pribadi atau keluarga kecil.</p>
                         <div class="flex justify-between">
                             <div>
@@ -228,12 +398,55 @@
                             </div>
                             <div>
                                 <p class="font-semibold">Kapasitas:</p>
-                                <p class="text-gray-600">6-8 Orang</p>
+                                <p class="text-gray-600">7 Orang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kendaraan 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="images/Mobil/Elf.jpg" alt="Elf" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Elf</h3>
+                        <p class="text-gray-600 mb-4">Kendaraan nyaman untuk grup kecil hingga menengah, cocok untuk wisata dan ziarah.</p>
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="font-semibold">Tipe:</p>
+                                <p class="text-gray-600">Mini Bus</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Kapasitas:</p>
+                                <p class="text-gray-600">16 Orang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kendaraan 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="images/Mobil/Heice.jpg" alt="HiAce" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">HiAce</h3>
+                        <p class="text-gray-600 mb-4">Kendaraan luas dan nyaman dengan fasilitas lengkap, ideal untuk rombongan besar dan perjalanan jarak jauh.</p>
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="font-semibold">Tipe:</p>
+                                <p class="text-gray-600">Mini Bus Premium</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Kapasitas:</p>
+                                <p class="text-gray-600">14 Orang</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -248,47 +461,35 @@
                         <tr>
                             <th class="py-3 px-4 text-left">Asal</th>
                             <th class="py-3 px-4 text-left">Tujuan</th>
-                            <th class="py-3 px-4 text-left">Durasi</th>
-                            <th class="py-3 px-4 text-left">Harga</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b">
                             <td class="py-3 px-4">Malang</td>
                             <td class="py-3 px-4">Bali</td>
-                            <td class="py-3 px-4">10-12 Jam</td>
-                            <td class="py-3 px-4">Rp 350.000</td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-3 px-4">Malang</td>
                             <td class="py-3 px-4">Madura</td>
-                            <td class="py-3 px-4">6-7 Jam</td>
-                            <td class="py-3 px-4">Rp 250.000</td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-3 px-4">Malang</td>
                             <td class="py-3 px-4">Surabaya</td>
-                            <td class="py-3 px-4">2-3 Jam</td>
-                            <td class="py-3 px-4">Rp 100.000</td>
                         </tr>
                         <tr class="border-b">
                             <td class="py-3 px-4">Malang</td>
                             <td class="py-3 px-4">Jember</td>
-                            <td class="py-3 px-4">4-5 Jam</td>
-                            <td class="py-3 px-4">Rp 150.000</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4">Malang</td>
                             <td class="py-3 px-4">Banyuwangi</td>
-                            <td class="py-3 px-4">7-8 Jam</td>
-                            <td class="py-3 px-4">Rp 200.000</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
             <div class="mt-8 text-center">
-                <p class="text-gray-600">* Pesan .......</p>
+                <p class="text-gray-600">* Pesan : Harga menyesuaikan titik penjemputan dan titik pengantara, untuk penjempuan jam 12 siang</p>
             </div>
         </div>
     </section>
@@ -353,11 +554,8 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4">Lokasi Kantor Kami</h3>
                     <div class="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                        <div class="text-center">
-                            <i class="fas fa-map text-gray-500 text-4xl mb-2"></i>
-                            <p class="text-gray-600">Peta Lokasi Shabira Trans</p>
-                            <p class="text-gray-500 text-sm">(Embed Google Maps akan ditampilkan di sini)</p>
-                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924.5303067232716!2d112.60118446954796!3d-8.086275371725366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e789f0016dbee87%3A0x35b942d38f729fc!2sSHABIRA%20TRANS!5e1!3m2!1sid!2sid!4v1761724985249!5m2!1sid!2sid"
+                        class="w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
