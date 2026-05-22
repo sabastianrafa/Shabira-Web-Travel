@@ -34,3 +34,8 @@ function pesanPaket(namaPaket) {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
 }
+
+AOS.init({
+  duration: 1000,
+  once: true,
+});
